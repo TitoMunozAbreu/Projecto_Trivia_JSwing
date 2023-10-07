@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org-openide-util-lookup">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../ValidationLib/org-openide-util-lookup.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ValidationLib/org-openide-util.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
