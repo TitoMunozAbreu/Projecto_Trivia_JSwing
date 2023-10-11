@@ -19,7 +19,7 @@ import java.util.Locale;
 
 /**
  * CLASE REGISTRO CONTROLADOR
- * Gestiona la capa de los componentes de la vista del registro
+ * Gestiona la capa de los componentes de la pantalla del registro
  */
 public class RegistroControlador extends Component implements ActionListener, ChangeListener, WindowListener {
     private PantallaRegistro pantallaRegistro;
@@ -64,6 +64,7 @@ public class RegistroControlador extends Component implements ActionListener, Ch
      */
     private void addListenersPantallaRegistro() {
         this.pantallaRegistro.getBtnCrear().addActionListener(this);
+        this.pantallaRegistro.getBtnHome().addActionListener(this);
         this.pantallaRegistro.addWindowListener(this);
         this.pantallaRegistro.getValidacionPanel().addChangeListener(e -> {stateChanged(e);});
     }
@@ -92,6 +93,8 @@ public class RegistroControlador extends Component implements ActionListener, Ch
             case "registrar":
                 registrarUsuario();
                 break;
+            case "home":
+                onClose();
         }
     }
 
@@ -108,7 +111,7 @@ public class RegistroControlador extends Component implements ActionListener, Ch
 
         //comprobar que esta creado
         if(!estaCreado){
-            JOptionPane.showMessageDialog(this,"Email se encuentra registrado","Verificar email",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Email ya existe, introduce otro","Verificar email",JOptionPane.ERROR_MESSAGE);
         }else {
             JOptionPane.showMessageDialog(this,"¡" +nuevoJugador.getNombre() + " vamos a descubrir Sevilla!","¡Bienvenido explorador", JOptionPane.INFORMATION_MESSAGE);
             //iniciar la pantalla categoria
@@ -116,6 +119,9 @@ public class RegistroControlador extends Component implements ActionListener, Ch
         }
     }
 
+    /**
+     * Metodo para cerra la pantalla registro
+     */
     public void onClose(){
         this.pantallaRegistro.dispose();
     }

@@ -2,6 +2,7 @@ package com.mvc.repositorio;
 
 import com.mvc.modelo.Jugador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JugadorRepositorio {
@@ -9,9 +10,9 @@ public class JugadorRepositorio {
     private List<Jugador> jugadores;
 
     public JugadorRepositorio(){
-        jugadores = List.of(
-                new Jugador("Papaya", "papaya@mail.com","1234")
-        );
+        jugadores = new ArrayList<>();
+        jugadores.add( new Jugador("Papaya", "papaya@mail.com","1234"));
+
     }
 
     //listar jugadores

@@ -102,35 +102,39 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="c4746" class="javax.swing.JRadioButton" binding="radioButton1" default-binding="true">
+                  <component id="c4746" class="javax.swing.JRadioButton" binding="opcion1">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="opcion1"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
-                  <component id="64072" class="javax.swing.JRadioButton" binding="radioButton2" default-binding="true">
+                  <component id="64072" class="javax.swing.JRadioButton" binding="opcion2">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="opcion2"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
-                  <component id="a8654" class="javax.swing.JRadioButton" binding="radioButton3" default-binding="true">
+                  <component id="a8654" class="javax.swing.JRadioButton" binding="opcion3">
                     <constraints>
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="opcion3"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
-                  <component id="8c799" class="javax.swing.JRadioButton" binding="radioButton4" default-binding="true">
+                  <component id="8c799" class="javax.swing.JRadioButton" binding="opcion4">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <actionCommand value="opcion4"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>

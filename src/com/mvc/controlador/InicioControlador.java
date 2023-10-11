@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * CLASE INICIO CONTROLADOR
- * Gestiona la capa de los componentes de la vista principal
+ * Gestiona la capa de los componentes de la pantalla inicio
  */
 public class InicioControlador extends JFrame implements ActionListener, ChangeListener {
     private PantallaInicio pantallaInicio;
@@ -70,7 +70,6 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
 
         //System.out.println(formatoMsgError);
     }
-
 
     /**
      * Metodo para activar los listeners

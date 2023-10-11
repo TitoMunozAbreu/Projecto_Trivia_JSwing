@@ -21,6 +21,7 @@ public class PantallaRegistro extends JDialog {
     private JLabel lblTitulo2;
     private JLabel image;
     private ValidationPanel validacionPanel;
+    private JButton btnHome;
 
     public PantallaRegistro() {
         //definir las especificaciones de la pantalla
@@ -48,6 +49,10 @@ public class PantallaRegistro extends JDialog {
 
     public JButton getBtnCrear() {
         return btnCrear;
+    }
+
+    public JButton getBtnHome() {
+        return btnHome;
     }
 
     public ValidationPanel getValidacionPanel() {

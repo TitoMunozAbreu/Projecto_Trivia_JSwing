@@ -1,37 +1,41 @@
 package com.mvc.vista.dialog;
 
 import javax.swing.*;
-import java.awt.event.*;
 
 public class PantallaCategoria extends JDialog {
     private JPanel contentPane;
-    private JButton btnCultura;
-    private JButton btnMonumentos;
-    private JButton btnHistoria;
+    private JButton btnJugar;
     private JLabel lblTitulo;
-    private JLabel lblTitulo2;
     private JPanel tituloPane;
     private JPanel btnsPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JButton btnHome;
+    private JComboBox comboBox;
+    private JLabel lblTitulo2;
+
 
     public PantallaCategoria() {
         setContentPane(contentPane);
         setModal(true);
-        setSize(400,300);
+        setSize(350,300);
+        setLocationRelativeTo(null);
         //getRootPane().setDefaultButton(buttonOK);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    public JButton getBtnJugar() {
+        return btnJugar;
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    public JLabel getLblTitulo() {
+        return lblTitulo;
     }
 
+    public JButton getBtnHome() {
+        return btnHome;
+    }
+
+    public JComboBox getComboBox() {
+        return comboBox;
+    }
 }
