@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ResourceBundleManager">
+    <file url="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle.properties" />
+    <file url="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_de.properties" />
+    <file url="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_fr.properties" />
+    <file url="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_it.properties" />
+    <custom-resource-bundle>
+      <file value="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle.properties" />
+      <file value="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_de.properties" />
+      <file value="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_fr.properties" />
+      <file value="jar://$PROJECT_DIR$/../ValidationLib/ValidationAPI.jar!/org/netbeans/validation/api/builtin/stringvalidation/Bundle_it.properties" />
+      <base-name>Bundle</base-name>
+    </custom-resource-bundle>
+  </component>
+</project>

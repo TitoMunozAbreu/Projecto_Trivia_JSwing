@@ -1,7 +1,8 @@
 package com.mvc.vista.dialog;
 
+import org.netbeans.validation.api.ui.swing.ValidationPanel;
+
 import javax.swing.*;
-import java.awt.event.*;
 
 public class PantallaRegistro extends JDialog {
     private JPanel contentPane;
@@ -15,61 +16,41 @@ public class PantallaRegistro extends JDialog {
     private JLabel lblNombre;
     private JLabel lblContraseña;
     private JLabel lblEmail;
-    private JButton crearButton;
+    private JButton btnCrear;
     private JLabel lbltitulo;
     private JLabel lblTitulo2;
     private JLabel image;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private ValidationPanel validacionPanel;
 
     public PantallaRegistro() {
+        //definir las especificaciones de la pantalla
         setContentPane(contentPane);
         setModal(true);
-        //getRootPane().setDefaultButton(buttonOK);
+        setSize(500,450);
+        setLocationRelativeTo(null);
+        getRootPane().setDefaultButton(btnCrear);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
+    public JTextField getNombre() {
+        return nombre;
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
+    public JTextField getContraseña() {
+        return contraseña;
     }
 
-    public static void main(String[] args) {
-        PantallaRegistro dialog = new PantallaRegistro();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    public JTextField getEmail() {
+        return email;
+    }
+
+    public JButton getBtnCrear() {
+        return btnCrear;
+    }
+
+    public ValidationPanel getValidacionPanel() {
+        return validacionPanel;
     }
 }

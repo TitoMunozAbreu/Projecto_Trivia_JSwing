@@ -1,5 +1,7 @@
 package com.mvc.vista.jframe;
 
+import org.netbeans.validation.api.ui.swing.ValidationPanel;
+
 import javax.swing.*;
 
 public class PantallaInicio extends JFrame{
@@ -7,8 +9,8 @@ public class PantallaInicio extends JFrame{
     private JPanel imagePane;
     private JPanel homePane;
     private JPanel titlePane;
-    private JPanel btnsPane;
-    private JTextField nombre;
+    private JPanel inicioPane;
+    private JTextField email;
     private JTextField contraseña;
     private JButton btnIniciar;
     private JButton btnRegistrar;
@@ -19,13 +21,41 @@ public class PantallaInicio extends JFrame{
     private JLabel image;
     private JLabel lblTitulo2;
     private JLabel lblTitulo3;
+    private JPanel validationPane;
+    private JPanel usuarioPane;
+    private JPanel btnPane;
+    private ValidationPanel validacionPanel;
+
 
     public PantallaInicio(){
         setContentPane(contentPane);
+        setTitle("Sevilla Trivia");
         setSize(550,500);
         setLocationRelativeTo(null);
+    }
 
+    public JTextField getEmail() {
+        return email;
+    }
 
+    public JTextField getContraseña() {
+        return contraseña;
+    }
+
+    public JButton getBtnIniciar() {
+        return btnIniciar;
+    }
+
+    public JButton getBtnRegistrar() {
+        return btnRegistrar;
+    }
+
+    public JButton getBtnAdmin() {
+        return btnAdmin;
+    }
+
+    public ValidationPanel getValidacionPanel() {
+        return validacionPanel;
     }
 
 }
