@@ -17,6 +17,7 @@ public class PantallaPregunta extends JDialog {
     private JLabel moneda;
     private JLabel iconReloj;
     private JLabel reloj;
+    private JButton btnCategoria;
 
     public PantallaPregunta() {
         setContentPane(contentPane);
@@ -25,6 +26,8 @@ public class PantallaPregunta extends JDialog {
         setSize(400,300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        //inicializar buttonGroup
+        this.buttonGroup = new ButtonGroup();
         //añadir button group
         this.buttonGroup.add(opcion1);
         this.buttonGroup.add(opcion2);
@@ -43,6 +46,22 @@ public class PantallaPregunta extends JDialog {
         return buttonGroup;
     }
 
+    public JRadioButton getOpcion1() {
+        return opcion1;
+    }
+
+    public JRadioButton getOpcion2() {
+        return opcion2;
+    }
+
+    public JRadioButton getOpcion3() {
+        return opcion3;
+    }
+
+    public JRadioButton getOpcion4() {
+        return opcion4;
+    }
+
     public JButton getBtnValidar() {
         return btnValidar;
     }
@@ -54,4 +73,6 @@ public class PantallaPregunta extends JDialog {
     public JLabel getReloj() {
         return reloj;
     }
+
+
 }
