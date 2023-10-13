@@ -18,6 +18,9 @@ public class PantallaPregunta extends JDialog {
     private JLabel iconReloj;
     private JLabel reloj;
     private JButton btnCategoria;
+    private JPanel OpcionPane;
+    private JPanel validarPane;
+    private JPanel opcionValidarPane;
 
     public PantallaPregunta() {
         setContentPane(contentPane);
