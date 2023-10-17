@@ -99,10 +99,10 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
                 autenticarJugador();
                 break;
             case "registrar":
-                registroControlador = new RegistroControlador();
+                registroControlador = new RegistroControlador(this.jugadorServicio);
                 break;
             case "admin":
-                adminControlador = new AdminControlador();
+                adminControlador = new AdminControlador(this.jugadorServicio);
                 break;
         }
 
@@ -120,7 +120,7 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         if(estaAutenticado){
             Jugador jugador = this.jugadorServicio.mostrarJugadorPorEmail(this.pantallaInicio.getEmail().getText());
             //iniciar la pantalla categoria
-            categoriaControlador = new CategoriaControlador(jugador);
+            categoriaControlador = new CategoriaControlador(this.jugadorServicio, jugador);
         }else {
             JOptionPane.showMessageDialog(this,"El email/contraseña es invalido","Verificar datos introducidos",JOptionPane.ERROR_MESSAGE);
             return;

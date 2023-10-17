@@ -1,5 +1,7 @@
 package com.mvc.modelo;
 
+import java.util.Objects;
+
 public class Jugador {
     private int id_jugador;
     private String nombre;
@@ -7,22 +9,29 @@ public class Jugador {
     private String contraseña;
     private int puntos;
 
-    static int num = 1;
+    public Jugador(){}
 
     public Jugador(String nombre, String email, String contraseña) {
         this.nombre = nombre;
         this.email = email;
         this.contraseña = contraseña;
         this.puntos = 0;
-        setId();
+    }
+
+    public Jugador(int id_jugador,String nombre, String email, String contraseña, int puntos) {
+        this.nombre = nombre;
+        this.email = email;
+        this.contraseña = contraseña;
+        this.puntos = puntos;
+        this.id_jugador = id_jugador;
     }
 
     public int getId_jugador() {
         return id_jugador;
     }
 
-    public void setId() {
-        this.id_jugador = Jugador.num++;
+    public void setId_jugador(int id_jugador) {
+        this.id_jugador = id_jugador;
     }
 
     public String getNombre() {
@@ -57,8 +66,14 @@ public class Jugador {
         this.puntos = puntos;
     }
 
-    public void sumarPuntosPorRespuestaCorrecta(){this.puntos +=10;}
-    public void sumarPuntosPorRespuestaRapida(){this.puntos +=15;}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Jugador jugador)) return false;
+        return getId_jugador() == jugador.getId_jugador() && Objects.equals(getEmail(), jugador.getEmail());
+    }
+
 
     @Override
     public String toString() {

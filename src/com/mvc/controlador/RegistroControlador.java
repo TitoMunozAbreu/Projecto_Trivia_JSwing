@@ -29,9 +29,9 @@ public class RegistroControlador extends Component implements ActionListener, Ch
     /**
      * CONTRUCTOR
      */
-    public RegistroControlador(){
+    public RegistroControlador(JugadorServicio jugadorServicio){
         //instanciar la capa de servicio de jugador
-        this.jugadorServicio = new JugadorServicio();
+        this.jugadorServicio = jugadorServicio;
         //instanciar pantalla del Registro
         this.pantallaRegistro = new PantallaRegistro();
         //activar los listeners
@@ -115,7 +115,7 @@ public class RegistroControlador extends Component implements ActionListener, Ch
         }else {
             JOptionPane.showMessageDialog(this,"¡" +nuevoJugador.getNombre() + " vamos a descubrir Sevilla!","¡Bienvenido explorador", JOptionPane.INFORMATION_MESSAGE);
             //iniciar la pantalla categoria
-            categoriaControlador = new CategoriaControlador(nuevoJugador);
+            categoriaControlador = new CategoriaControlador(this.jugadorServicio,nuevoJugador);
         }
     }
 

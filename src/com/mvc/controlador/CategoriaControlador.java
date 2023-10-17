@@ -1,6 +1,7 @@
 package com.mvc.controlador;
 
 import com.mvc.modelo.Jugador;
+import com.mvc.servicio.JugadorServicio;
 import com.mvc.vista.dialog.PantallaCategoria;
 import com.mvc.vista.jframe.PantallaInicio;
 
@@ -18,6 +19,7 @@ import java.util.Arrays;
 public class CategoriaControlador implements ActionListener, WindowListener {
     private PantallaCategoria pantallaCategoria;
     private PreguntaControlador PreguntaControlador;
+    private JugadorServicio jugadorServicio;
 
     private Jugador jugador;
     private final String[] CATEGORIAS = {"Cultura", "Monumentos", "Historia"};
@@ -26,7 +28,8 @@ public class CategoriaControlador implements ActionListener, WindowListener {
      * CONTRUCTOR
      * @param jugador
      */
-    public CategoriaControlador(Jugador jugador){
+    public CategoriaControlador(JugadorServicio jugadorServicio,Jugador jugador){
+        this.jugadorServicio = jugadorServicio;
         this.jugador = jugador;
         this.pantallaCategoria = new PantallaCategoria();
         this.pantallaCategoria.getLblTitulo().setText("¡Descubre Sevilla!");
@@ -77,7 +80,8 @@ public class CategoriaControlador implements ActionListener, WindowListener {
     private void onJugar(String categoriaSeleccionada) {
         onClose();
         //iniciar pantalla controlador
-        this.PreguntaControlador = new PreguntaControlador(categoriaSeleccionada,
+        this.PreguntaControlador = new PreguntaControlador(this.jugadorServicio,
+                                                            categoriaSeleccionada,
                                                             this.jugador);
 
     }

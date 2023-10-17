@@ -36,10 +36,10 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      * @param categoria
      * @param jugador
      */
-    public PreguntaControlador(String categoria, Jugador jugador) {
+    public PreguntaControlador(JugadorServicio jugadorServicio, String categoria, Jugador jugador) {
         //Instanciar variables
         this.preguntaServicio = new PreguntaServicio();
-        this.jugadorServicio = new JugadorServicio();
+        this.jugadorServicio = jugadorServicio;
         this.categoria = categoria.toLowerCase();
         this.jugador = jugador;
         this.preguntas = this.preguntaServicio.listarPreguntasSegunCategoria(this.categoria);
@@ -97,7 +97,8 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      * Metodo para cargar la siguiente pregunta
      */
     private void cargarSiguientePregunta() {
-        this.pantallaPregunta.getMoneda().setText(String.valueOf(this.jugador.getPuntos()));
+        int puntosJugador = this.jugadorServicio.mostrarJugadorPorEmail(this.jugador.getEmail()).getPuntos();
+        this.pantallaPregunta.getMoneda().setText(String.valueOf(puntosJugador));
         this.preguntaActualIndex++;
         cargarPregunta();
         configurarTemporizador();

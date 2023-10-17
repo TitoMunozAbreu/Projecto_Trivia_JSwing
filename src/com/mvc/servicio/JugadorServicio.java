@@ -50,4 +50,12 @@ public class JugadorServicio {
     public List<Jugador> mostrarJugadores() {
         return this.jugadorRepositorio.mostrarJugadores();
     }
+
+    public boolean eliminarJugador(Jugador jugadorSeleccionado) {
+        return this.jugadorRepositorio.eliminarJugador(jugadorSeleccionado);
+    }
+
+    public boolean actualizarJugador(Jugador nuevoJugador, String emailJugadorSeleccionado) {
+        return this.jugadorRepositorio.actualizarJugador(nuevoJugador, emailJugadorSeleccionado);
+    }
 }
