@@ -14,12 +14,12 @@ public class PreguntaRepositorio {
     public PreguntaRepositorio(){
         preguntas = new ArrayList<>();
                 this.preguntas.add(new Pregunta(
-                        "¿Qué famoso explorador partió desde Sevilla en su viaje al Nuevo Mundo en 1492?",
+                        "¿Qué famoso explorador partió desde Sevilla en su viaje alrededor del mundo en 1519?",
                         "Cristóbal Colón",
                         "Vasco da Gama",
                         "Fernando Magallanes",
                         "Hernán Cortés",
-                        1,
+                        3,
                         "historia"
                 ));
                 this.preguntas.add(new Pregunta(
@@ -32,7 +32,7 @@ public class PreguntaRepositorio {
                         "historia"
                 ));
                 this.preguntas.add(new Pregunta(
-                        "¿En cuál de estos ríos está situada la ciudad de Sevilla?",
+                        "¿Cuál de estos ríos pertenece a la ciudad de Sevilla?",
                         "Río Amazonas",
                         "Río Nilo",
                         "Río Guadalquivir",
@@ -77,7 +77,7 @@ public class PreguntaRepositorio {
                 "monumentos"
         ));
         this.preguntas.add(new Pregunta(
-                "¿Cuál es la plaza más grande de Sevilla y una de las más espectaculares?",
+                "¿Cuál es la plaza más grande de Sevilla?",
                 "Plaza de América",
                 "Plaza de España",
                 "Plaza Nueva",
@@ -114,7 +114,7 @@ public class PreguntaRepositorio {
         ));
         this.preguntas.add(new Pregunta(
                 "¿Cómo se llama el traje tradicional que se usa en la Feria de Abril?",
-                "Traje Flamenco",
+                "Traje de Flamenca",
                 "Traje de Cóctel",
                 "Traje de Gala",
                 "Traje de Baño",
@@ -131,7 +131,7 @@ public class PreguntaRepositorio {
                 "cultura"
         ));
         this.preguntas.add(new Pregunta(
-                "¿Cuál es la danza tradicional y característica de la cultura andaluza?",
+                "¿Cuál es la música tradicional y característica de la cultura andaluza?",
                 "Sardana",
                 "Flamenco",
                 "Jota",
@@ -141,10 +141,10 @@ public class PreguntaRepositorio {
         ));
         this.preguntas.add(new Pregunta(
                 "¿Qué actividad es muy popular durante la Feria de Abril?",
-                "Comer churros",
-                "Montar en bicicleta",
-                "Montar en atracciones",
-                "Hacer manualidades",
+                "Bailar la macarena",
+                "Bañarse en el rio",
+                "Comer bueñuelo",
+                "Montar en el Jaguar",
                 3,
                 "cultura"
         ));

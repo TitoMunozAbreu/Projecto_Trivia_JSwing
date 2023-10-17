@@ -26,7 +26,7 @@ public class PantallaPregunta extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(btnValidar);
-        setSize(400,300);
+        setSize(650,300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         //inicializar buttonGroup

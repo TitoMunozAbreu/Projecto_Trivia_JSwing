@@ -30,6 +30,7 @@
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="1"/>
               <text value="0"/>
             </properties>
           </component>
@@ -47,7 +48,8 @@
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="0"/>
+              <font style="1"/>
+              <text value="30"/>
             </properties>
           </component>
           <hspacer id="c6271">
@@ -107,7 +109,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <actionCommand value="opcion1"/>
+                      <actionCommand value="1"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
@@ -116,7 +118,7 @@
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <actionCommand value="opcion2"/>
+                      <actionCommand value="2"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
@@ -125,7 +127,7 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <actionCommand value="opcion3"/>
+                      <actionCommand value="3"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>
@@ -134,7 +136,7 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <actionCommand value="opcion4"/>
+                      <actionCommand value="4"/>
                       <text value="RadioButton"/>
                     </properties>
                   </component>

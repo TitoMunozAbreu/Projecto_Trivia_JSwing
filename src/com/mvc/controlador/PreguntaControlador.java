@@ -2,85 +2,136 @@ package com.mvc.controlador;
 
 import com.mvc.modelo.Jugador;
 import com.mvc.modelo.Pregunta;
+import com.mvc.servicio.JugadorServicio;
 import com.mvc.servicio.PreguntaServicio;
 import com.mvc.vista.dialog.PantallaPregunta;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * CLASE PREGUNTA CONTROLADOR
  * Gestiona la capa de los componentes de la pantalla pregunta
  */
-public class PreguntaControlador implements ActionListener, WindowListener {
+public class PreguntaControlador extends Component implements ActionListener, WindowListener {
     private PantallaPregunta pantallaPregunta;
     private PreguntaServicio preguntaServicio;
+    private JugadorServicio jugadorServicio;
     private String categoria;
     private Jugador jugador;
+    private List<Pregunta> preguntas;
+    private int tiempoRestante;
+    private int preguntaActualIndex;
+    private Pregunta pregunta;
+    private Timer timer;
 
+    /**
+     * CONSTRUCTOR
+     * @param categoria
+     * @param jugador
+     */
     public PreguntaControlador(String categoria, Jugador jugador) {
         //Instanciar variables
         this.preguntaServicio = new PreguntaServicio();
+        this.jugadorServicio = new JugadorServicio();
         this.categoria = categoria.toLowerCase();
         this.jugador = jugador;
-        System.out.println(categoria);
-        System.out.println(jugador.getNombre());
+        this.preguntas = this.preguntaServicio.listarPreguntasSegunCategoria(this.categoria);
+        this.preguntaActualIndex = 0;
 
         //inicializar la pantalla pregunta
         this.pantallaPregunta = new PantallaPregunta();
-        System.out.println("pantalla pregunta");
         //activar los listeners
         addListenesPantallaPregunta();
-        //mostrar preguntas y opciones de respuesta
-        addPreguntasYRespuestas();
-        //inciar temporizador
-        setTemporizador();
-        //validar respuesta
+        //cargar preguntas
+        cargarPregunta();
+        //configuracion del temporizador
+        configurarTemporizador();
+        //configurar puntuacion segun jugador
+        this.pantallaPregunta.getMoneda().setText(String.valueOf(jugador.getPuntos()));
+
         this.pantallaPregunta.setVisible(true);
     }
 
-    private void setTemporizador() {
-        Timer timer = new Timer();
-        TimerTask timerTask = new TimerTask() {
+    /**
+     * Metodo para establecer un temporizador
+     * de cuenta regresiva para responder la pregunta
+     */
+    private void configurarTemporizador() {
+        //establecer tiempo para responder 15sg
+        this.tiempoRestante = 15;
+        //mostrar el tiempo en la pantallaPregunta
+        this.pantallaPregunta.getReloj().setText("" + this.tiempoRestante);
 
-            int contador = 2000;
+        //conteo de cada segundo
+        this.timer = new Timer(1000, new ActionListener() {
             @Override
-            public void run() {
-                do{
-                    addPreguntasYRespuestas();
-                }while(contador > 0);
+            public void actionPerformed(ActionEvent e) {
+                tiempoRestante--;
+                if(tiempoRestante > 0){
+                    pantallaPregunta.getReloj().setText(" " + tiempoRestante);
 
+                }else {
+                    timer.stop();
+                    //TODO implementar clase sonido, de fallar pregunta
+                    JOptionPane.showMessageDialog(
+                            PreguntaControlador.this,
+                            "¡Vamos explorador! debes responder mas rapido",
+                            "Tiempo para responder ha terminado",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    cargarSiguientePregunta();
+                }
             }
-        };
+        });
+        this.timer.start();
+    }
+
+    /**
+     * Metodo para cargar la siguiente pregunta
+     */
+    private void cargarSiguientePregunta() {
+        this.preguntaActualIndex++;
+        cargarPregunta();
+        configurarTemporizador();
 
     }
 
-    private void addPreguntasYRespuestas() {
-        System.out.println("metodos añadir preguntas");
-        //almacenar las preguntas segun categoria
-        List<Pregunta> preguntas = this.preguntaServicio.listarPreguntasSegunCategoria(this.categoria);
-
-        //iterar sobre la lista de preguntas
-        for (Pregunta pregunta: preguntas){
-            System.out.println("iterar sobre pregunta" + pregunta.getPregunta());
+    /**
+     * Metodo para cargar la pregunta
+     */
+    private void cargarPregunta() {
+        //desabilitar boton validar
+        this.pantallaPregunta.getBtnValidar().setEnabled(false);
+        //comprobar si actual indice a superado el tamaño de la lista
+        if(preguntaActualIndex < preguntas.size()){
+            //obtener el objeto pregunta
+            this.pregunta = preguntas.get(preguntaActualIndex);
             //establecer pregunta en pantalla
-            this.pantallaPregunta.getLabelPegunta().setText(pregunta.getPregunta());
-            //establecer posibles respuestas
-            this.pantallaPregunta.getOpcion1().setText(pregunta.getOpciones1());
-            this.pantallaPregunta.getOpcion2().setText(pregunta.getOpciones2());
-            this.pantallaPregunta.getOpcion3().setText(pregunta.getOpciones3());
-            this.pantallaPregunta.getOpcion4().setText(pregunta.getOpciones4());
+            pantallaPregunta.getLabelPegunta().setText(pregunta.getPregunta());
+            //establecer opciones de respuestas
+            pantallaPregunta.getOpcion1().setText(pregunta.getOpciones1());
+            pantallaPregunta.getOpcion2().setText(pregunta.getOpciones2());
+            pantallaPregunta.getOpcion3().setText(pregunta.getOpciones3());
+            pantallaPregunta.getOpcion4().setText(pregunta.getOpciones4());
+        }else {
+            //TODO implementar clase sonido, de completada la ronda de preguntas
+            JOptionPane.showMessageDialog(
+                    PreguntaControlador.this,
+                    "¡Explorador! has finalizo las preguntas de la categoria: " + this.categoria,
+                    "Preguntas finalizada",
+                    JOptionPane.INFORMATION_MESSAGE);
+            //TODO, mostrar pantalla de podium
 
         }
-
     }
+
 
     /**
      * Metodo para activar los listeners
@@ -92,18 +143,70 @@ public class PreguntaControlador implements ActionListener, WindowListener {
         this.pantallaPregunta.getOpcion2().addActionListener(this);
         this.pantallaPregunta.getOpcion3().addActionListener(this);
         this.pantallaPregunta.getOpcion4().addActionListener(this);
+        this.pantallaPregunta.addWindowListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //alamacenar la opcion de respuesta seleccionada
+        int opcionSeleccionada = opcionSeleccionada();
+        //almacenar el boton seleccionado
+        String command = e.getActionCommand();
+
+        //comprobar boton selecionado
+        switch (command){
+            case "validar":
+                validarRespuesta(opcionSeleccionada);
+        }
 
 
+    }
+
+    /**
+     * Meotod para validar la respuesta seleccionada
+     * @param opcionSeleccionada
+     */
+    private void validarRespuesta(int opcionSeleccionada) {
+        //comprobar respuesta correcta
+        if(this.pregunta.getRespuestaCorrecta() == opcionSeleccionada){
+            this.timer.stop();
+            JOptionPane.showMessageDialog(
+                    PreguntaControlador.this,
+                    "¡OLE! es CORRRECTA!",
+                    "Respuesta",JOptionPane.INFORMATION_MESSAGE);
+            //sumar puntos
+            sumarPuntos();
+            cargarSiguientePregunta();
+        }else {
+            JOptionPane.showMessageDialog(this,"¡INVALIDA!","Respuesta",JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private void sumarPuntos() {
+        //comprobar si tiempo de respuesta fue entre 0-5 seg
+        //if(this.tiempoRestante)
+    }
+
+    public int opcionSeleccionada(){
+        Enumeration<AbstractButton> buttonEnumeration = this.pantallaPregunta.getButtonGroup().getElements();
+        int opcionSelececcionada = 0;
+
+        while(buttonEnumeration.hasMoreElements()){
+            JRadioButton opcionRespuesta = (JRadioButton) buttonEnumeration.nextElement();
+            if(opcionRespuesta.isSelected()){
+                opcionSelececcionada = Integer.parseInt(opcionRespuesta.getActionCommand());
+                this.pantallaPregunta.getBtnValidar().setEnabled(true);
+            }
+        }
+        return opcionSelececcionada;
     }
 
     public void onClose(){
         //cancelar temporizador
         //cerrar pantalla pregunta
+        this.timer.stop();
         this.pantallaPregunta.dispose();
     }
 
@@ -114,7 +217,7 @@ public class PreguntaControlador implements ActionListener, WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
-
+            onClose();
     }
 
     @Override

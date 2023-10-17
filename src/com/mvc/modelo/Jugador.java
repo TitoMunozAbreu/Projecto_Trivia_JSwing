@@ -57,6 +57,9 @@ public class Jugador {
         this.puntos = puntos;
     }
 
+    public void sumarPuntosPorRespuestaCorrecta(){this.puntos +=10;}
+    public void sumarPuntosPorRespuestaRapida(){this.puntos +=15;}
+
     @Override
     public String toString() {
         return      id_jugador
