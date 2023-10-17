@@ -29,7 +29,8 @@ public class CategoriaControlador implements ActionListener, WindowListener {
     public CategoriaControlador(Jugador jugador){
         this.jugador = jugador;
         this.pantallaCategoria = new PantallaCategoria();
-        this.pantallaCategoria.getLblTitulo().setText("¡Explorador " + jugador.getNombre() + "!");
+        this.pantallaCategoria.getLblTitulo().setText("¡Descubre Sevilla!");
+        this.pantallaCategoria.setTitle("Bienvenido Explorador | " + this.jugador.getNombre());
         //activar los listeners
         addListenesPantallaCategoria();
         //incluir las opciones al comboBox
@@ -45,6 +46,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
     private void addListenesPantallaCategoria() {
         this.pantallaCategoria.getBtnHome().addActionListener(this);
         this.pantallaCategoria.getBtnJugar().addActionListener(this);
+        this.pantallaCategoria.addWindowListener(this);
     }
 
     /**
@@ -60,10 +62,12 @@ public class CategoriaControlador implements ActionListener, WindowListener {
         switch (command){
             case "home":
                 onClose();
+                break;
             case "jugar":
                 //almacenar la categoria seleccionada
                 String categoriaSeleccionada = (String) this.pantallaCategoria.getComboBox().getSelectedItem();
                 onJugar(categoriaSeleccionada);
+                break;
         }
     }
 
@@ -92,6 +96,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
 
     @Override
     public void windowClosing(WindowEvent e) {
+        onClose();
 
     }
 

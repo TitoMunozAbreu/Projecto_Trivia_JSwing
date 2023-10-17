@@ -11,6 +11,8 @@ public class PantallaCategoria extends JDialog {
     private JButton btnHome;
     private JComboBox comboBox;
     private JLabel lblTitulo2;
+    private JPanel RegresarPane;
+    private JPanel todoPane;
 
 
     public PantallaCategoria() {

@@ -3,6 +3,8 @@ package com.mvc.servicio;
 import com.mvc.modelo.Jugador;
 import com.mvc.repositorio.JugadorRepositorio;
 
+import java.util.List;
+
 /**
  * CLASE JUGADOR SERVICIO
  */
@@ -34,5 +36,18 @@ public class JugadorServicio {
 
     public boolean crearJugador(Jugador nuevoJugador) {
         return this.jugadorRepositorio.crearJugador(nuevoJugador);
+    }
+
+    public void sumarPuntosPorRespuestaRapida(Jugador jugador) {
+        this.jugadorRepositorio.sumarPuntosPorRespuestaRapida(jugador);
+    }
+
+    public void sumarPuntosPorRespuestaCorrecta(Jugador jugador) {
+        this.jugadorRepositorio.sumarPuntosPorRespuestaCorrecta(jugador);
+
+    }
+
+    public List<Jugador> mostrarJugadores() {
+        return this.jugadorRepositorio.mostrarJugadores();
     }
 }

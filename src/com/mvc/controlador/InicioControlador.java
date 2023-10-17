@@ -119,7 +119,6 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         //mostrar mensaje
         if(estaAutenticado){
             Jugador jugador = this.jugadorServicio.mostrarJugadorPorEmail(this.pantallaInicio.getEmail().getText());
-            JOptionPane.showMessageDialog(this,"¡" +jugador.getNombre() + " vamos a descubrir Sevilla!","¡Bienvenido explorador", JOptionPane.INFORMATION_MESSAGE);
             //iniciar la pantalla categoria
             categoriaControlador = new CategoriaControlador(jugador);
         }else {

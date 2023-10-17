@@ -19,6 +19,7 @@ public class JugadorRepositorio {
     public List<Jugador> mostrarJugadores(){
         return jugadores;
     }
+
     //mostrar jugador
     public Jugador mostrarJugadorPorEmail(String email){
         return mostrarJugadores().
@@ -57,6 +58,16 @@ public class JugadorRepositorio {
                 .filter(jugador ->
                         jugador.getEmail().equals(email) && jugador.getContraseña().equals(contraseña))
                 .findFirst().isPresent();
+    }
+
+    public void sumarPuntosPorRespuestaRapida(Jugador jugador) {
+        //sumar puntos al jugador
+        jugador.sumarPuntosPorRespuestaRapida();
+    }
+
+    public void sumarPuntosPorRespuestaCorrecta(Jugador jugador) {
+        //sumar puntos al jugador
+        jugador.sumarPuntosPorRespuestaCorrecta();
     }
     //actualizar jugador
 

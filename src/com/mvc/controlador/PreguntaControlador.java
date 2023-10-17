@@ -47,6 +47,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
 
         //inicializar la pantalla pregunta
         this.pantallaPregunta = new PantallaPregunta();
+        this.pantallaPregunta.setTitle("Preguntas de categoria: " + categoria);
         //activar los listeners
         addListenesPantallaPregunta();
         //cargar preguntas
@@ -55,8 +56,8 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         configurarTemporizador();
         //configurar puntuacion segun jugador
         this.pantallaPregunta.getMoneda().setText(String.valueOf(jugador.getPuntos()));
-
         this.pantallaPregunta.setVisible(true);
+
     }
 
     /**
@@ -74,7 +75,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
             @Override
             public void actionPerformed(ActionEvent e) {
                 tiempoRestante--;
-                if(tiempoRestante > 0){
+                if(tiempoRestante >= 0){
                     pantallaPregunta.getReloj().setText(" " + tiempoRestante);
 
                 }else {
@@ -85,7 +86,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                             "¡Vamos explorador! debes responder mas rapido",
                             "Tiempo para responder ha terminado",
                             JOptionPane.ERROR_MESSAGE);
-
                     cargarSiguientePregunta();
                 }
             }
@@ -97,6 +97,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      * Metodo para cargar la siguiente pregunta
      */
     private void cargarSiguientePregunta() {
+        this.pantallaPregunta.getMoneda().setText(String.valueOf(this.jugador.getPuntos()));
         this.preguntaActualIndex++;
         cargarPregunta();
         configurarTemporizador();
@@ -122,11 +123,16 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
             pantallaPregunta.getOpcion4().setText(pregunta.getOpciones4());
         }else {
             //TODO implementar clase sonido, de completada la ronda de preguntas
+            //detener temporizador
+            this.timer.stop();
+            //mostrar mensaje por pantalla
             JOptionPane.showMessageDialog(
                     PreguntaControlador.this,
                     "¡Explorador! has finalizo las preguntas de la categoria: " + this.categoria,
                     "Preguntas finalizada",
                     JOptionPane.INFORMATION_MESSAGE);
+            //cerrar pantalla pregunta
+            this.pantallaPregunta.dispose();
             //TODO, mostrar pantalla de podium
 
         }
@@ -158,6 +164,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         switch (command){
             case "validar":
                 validarRespuesta(opcionSeleccionada);
+                break;
         }
 
 
@@ -168,25 +175,39 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      * @param opcionSeleccionada
      */
     private void validarRespuesta(int opcionSeleccionada) {
+        this.timer.stop();
         //comprobar respuesta correcta
         if(this.pregunta.getRespuestaCorrecta() == opcionSeleccionada){
             this.timer.stop();
+            //sumar puntos
+            int puntos = sumarPuntosPorTiempoRespuesta();
+            //mostar mensaje al jugador
             JOptionPane.showMessageDialog(
                     PreguntaControlador.this,
-                    "¡OLE! es CORRRECTA!",
-                    "Respuesta",JOptionPane.INFORMATION_MESSAGE);
-            //sumar puntos
-            sumarPuntos();
+                    "¡OLE! sigue así explorador has ganado: " + puntos + " monedas!",
+                    "Respuesta Correcta",JOptionPane.INFORMATION_MESSAGE);
             cargarSiguientePregunta();
         }else {
-            JOptionPane.showMessageDialog(this,"¡INVALIDA!","Respuesta",JOptionPane.ERROR_MESSAGE);
-
+            JOptionPane.showMessageDialog(
+                    this,
+                    "¡NO has acertado, animo explorador!",
+                    "Respuesta Incorrecta",JOptionPane.ERROR_MESSAGE);
+            cargarSiguientePregunta();
         }
     }
 
-    private void sumarPuntos() {
+    private int sumarPuntosPorTiempoRespuesta() {
+        int puntos = 0;
         //comprobar si tiempo de respuesta fue entre 0-5 seg
-        //if(this.tiempoRestante)
+        if(this.tiempoRestante > 10){
+            //sumar puntos por rapidez de respuesta al jugador
+            this.jugadorServicio.sumarPuntosPorRespuestaRapida(this.jugador);
+            puntos = 15;
+        }else if(this.tiempoRestante > 1 || this.tiempoRestante < 11){
+            this.jugadorServicio.sumarPuntosPorRespuestaCorrecta(this.jugador);
+            puntos = 10;
+        }
+        return puntos;
     }
 
     public int opcionSeleccionada(){
