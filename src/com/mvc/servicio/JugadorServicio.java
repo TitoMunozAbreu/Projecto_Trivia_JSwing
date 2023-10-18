@@ -58,4 +58,8 @@ public class JugadorServicio {
     public boolean actualizarJugador(Jugador nuevoJugador, String emailJugadorSeleccionado) {
         return this.jugadorRepositorio.actualizarJugador(nuevoJugador, emailJugadorSeleccionado);
     }
+
+    public void cerrarConexionBBDD() {
+        this.jugadorRepositorio.closeConexionBBDD();
+    }
 }

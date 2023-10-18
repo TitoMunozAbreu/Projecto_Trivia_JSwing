@@ -122,7 +122,11 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
             //iniciar la pantalla categoria
             categoriaControlador = new CategoriaControlador(this.jugadorServicio, jugador);
         }else {
-            JOptionPane.showMessageDialog(this,"El email/contraseña es invalido","Verificar datos introducidos",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "El email/contraseña es inválido, si no posee cuenta haga click al botón registrar",
+                    "Verificación de datos introducidos",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
     }

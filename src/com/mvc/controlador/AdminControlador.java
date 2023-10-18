@@ -115,7 +115,6 @@ public class AdminControlador extends Component implements ActionListener, Windo
         Jugador nuevoJugador = new Jugador(nombre,email,contraseña);
         //alamcenar si el jugador esta creado
         boolean estaCreado = this.jugadorServicio.actualizarJugador(nuevoJugador, this.jugadorSeleccionado.getEmail());
-        System.out.println(estaCreado);
 
         //comprobar que esta creado
         if(!estaCreado){
@@ -128,7 +127,7 @@ public class AdminControlador extends Component implements ActionListener, Windo
             JOptionPane.showMessageDialog(
                     this,
                     "Felicidades el jugador ha sido actualizado",
-                    "¡Explorador actualiado!",
+                    "¡Explorador actualizado!",
                     JOptionPane.INFORMATION_MESSAGE);
             cargarDatosTabla();
 
@@ -175,10 +174,16 @@ public class AdminControlador extends Component implements ActionListener, Windo
     }
 
     private void eliminarJugadorSeleccionado() {
-        boolean esEliminado = this.jugadorServicio.eliminarJugador(this.jugadorSeleccionado);
-
-        //comprobar si el jugador seleccionado ha sido eliminado
-        if(esEliminado){
+        //preguntar si esta seguro de eliminar el jugador seleccionado
+        int eliminar_explorador = JOptionPane.showConfirmDialog(
+                AdminControlador.this,
+                "Esta seguro de eliminar al explorador " + this.jugadorSeleccionado.getNombre(),
+                "Eliminar explorador",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.WARNING_MESSAGE
+        );
+        if(eliminar_explorador == 0){
+            boolean esEliminado = this.jugadorServicio.eliminarJugador(this.jugadorSeleccionado);
             //mostrar mensaje de eliminado
             JOptionPane.showMessageDialog(
                     AdminControlador.this,
@@ -186,9 +191,8 @@ public class AdminControlador extends Component implements ActionListener, Windo
                     "Jugador Eliminado",
                     JOptionPane.INFORMATION_MESSAGE
             );
-            cargarDatosTabla();
-
         }
+        cargarDatosTabla();
     }
 
     @Override
@@ -203,7 +207,7 @@ public class AdminControlador extends Component implements ActionListener, Windo
 
 
     /**
-     * Clase ClienteTableModel para definir los
+     * Clase JugadorTableModel para definir los
      * datos de la tabla
      */
     private static class JugadorTableModel extends AbstractTableModel {

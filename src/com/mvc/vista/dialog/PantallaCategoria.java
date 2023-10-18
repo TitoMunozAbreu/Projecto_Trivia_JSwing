@@ -18,7 +18,7 @@ public class PantallaCategoria extends JDialog {
     public PantallaCategoria() {
         setContentPane(contentPane);
         setModal(true);
-        setSize(350,300);
+        setSize(350,350);
         setLocationRelativeTo(null);
         //getRootPane().setDefaultButton(buttonOK);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

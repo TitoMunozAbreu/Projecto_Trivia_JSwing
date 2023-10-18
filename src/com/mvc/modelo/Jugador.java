@@ -2,7 +2,7 @@ package com.mvc.modelo;
 
 import java.util.Objects;
 
-public class Jugador {
+public class Jugador implements Comparable<Jugador> {
     private int id_jugador;
     private String nombre;
     private String email;
@@ -80,5 +80,10 @@ public class Jugador {
         return      id_jugador
                 + nombre
                 + puntos;
+    }
+
+    @Override
+    public int compareTo(Jugador o) {
+        return Integer.compare(o.getPuntos(),this.getPuntos());
     }
 }

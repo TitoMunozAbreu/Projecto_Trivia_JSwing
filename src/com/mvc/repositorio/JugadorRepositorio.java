@@ -198,7 +198,7 @@ public class JugadorRepositorio {
 
     public boolean actualizarJugador(Jugador jugadorActualizado, String emailJugadorSeleccionado){
         boolean estaActualizado = false;
-        try{//"UPDATE JUGADOR j SET j.nombre = ?, j.email = ?, j.contraseña = ? WHERE j.email = ?";
+        try{
 
             PreparedStatement ps = this.connection.prepareStatement(ACTUALIZAR);
             ps.setString(1, jugadorActualizado.getNombre());

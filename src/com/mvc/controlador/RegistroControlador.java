@@ -107,13 +107,22 @@ public class RegistroControlador extends Component implements ActionListener, Ch
         Jugador nuevoJugador = new Jugador(nombre,email,contraseña);
         //alamcenar si el jugador esta creado
         boolean estaCreado = this.jugadorServicio.crearJugador(nuevoJugador);
-        System.out.println(estaCreado);
 
         //comprobar que esta creado
         if(!estaCreado){
-            JOptionPane.showMessageDialog(this,"Email ya existe, introduce otro","Verificar email",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Email ya existe, introducir otro",
+                    "Verificación de email",
+                    JOptionPane.ERROR_MESSAGE);
         }else {
-            JOptionPane.showMessageDialog(this,"¡" +nuevoJugador.getNombre() + " vamos a descubrir Sevilla!","¡Bienvenido explorador", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "¡" +nuevoJugador.getNombre() + " vamos a descubrir Sevilla!",
+                    "¡Bienvenido explorador",
+                    JOptionPane.INFORMATION_MESSAGE);
+            //cerrar pantalla de registro
+            onClose();
             //iniciar la pantalla categoria
             categoriaControlador = new CategoriaControlador(this.jugadorServicio,nuevoJugador);
         }

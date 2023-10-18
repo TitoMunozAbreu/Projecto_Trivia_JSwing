@@ -21,6 +21,7 @@ import java.util.List;
  */
 public class PreguntaControlador extends Component implements ActionListener, WindowListener {
     private PantallaPregunta pantallaPregunta;
+    private PodioControlador podioControlador;
     private PreguntaServicio preguntaServicio;
     private JugadorServicio jugadorServicio;
     private String categoria;
@@ -134,7 +135,8 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                     JOptionPane.INFORMATION_MESSAGE);
             //cerrar pantalla pregunta
             this.pantallaPregunta.dispose();
-            //TODO, mostrar pantalla de podium
+            //mostrar pantalla de podium
+            this.podioControlador = new PodioControlador(this.jugadorServicio, this.jugador);
 
         }
     }
