@@ -30,7 +30,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
     private int tiempoRestante;
     private int preguntaActualIndex;
     private Pregunta pregunta;
-    private Timer timer;
+    private static Timer timer;
 
     /**
      * CONSTRUCTOR
