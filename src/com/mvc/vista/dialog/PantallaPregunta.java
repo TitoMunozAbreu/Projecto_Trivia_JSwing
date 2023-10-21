@@ -17,7 +17,7 @@ public class PantallaPregunta extends JDialog {
     private JLabel moneda;
     private JLabel iconReloj;
     private JLabel reloj;
-    private JButton btnCategoria;
+    private JButton btnVolver;
     private JPanel OpcionPane;
     private JPanel validarPane;
     private JPanel opcionValidarPane;
@@ -27,6 +27,8 @@ public class PantallaPregunta extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(btnValidar);
         setSize(650,300);
+        ImageIcon imageIcon = new ImageIcon("src/com/recursos/images/azulejos.png");
+        setIconImage(imageIcon.getImage());
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         //inicializar buttonGroup
@@ -77,5 +79,7 @@ public class PantallaPregunta extends JDialog {
         return reloj;
     }
 
-
+    public JButton getBtnVolver() {
+        return btnVolver;
+    }
 }

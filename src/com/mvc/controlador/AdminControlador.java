@@ -23,6 +23,8 @@ public class AdminControlador extends Component implements ActionListener, Windo
     private JugadorServicio jugadorServicio;
     private JugadorTableModel jugadorTableModel;
     private Jugador jugadorSeleccionado;
+    private UIManager uiManager;
+
 
     public AdminControlador(JugadorServicio jugadorServicio){
         //instanciar variables
@@ -36,6 +38,11 @@ public class AdminControlador extends Component implements ActionListener, Windo
         desabilitarBotones();
         //activar validacion de datos
         addValidation();
+        //configurar colores de JOptionPane
+        this.uiManager = new UIManager();
+        UIManager.put("OptionPane.background",new Color(255,249,196));
+        UIManager.put("Panel.background",new Color(255,249,196));
+        UIManager.put("OptionPane.messageForeground",new Color(183,28,28));
         pantallaAdmin.setVisible(true);
     }
 

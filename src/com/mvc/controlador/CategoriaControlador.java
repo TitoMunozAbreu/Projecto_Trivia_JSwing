@@ -20,8 +20,6 @@ public class CategoriaControlador implements ActionListener, WindowListener {
     private PantallaCategoria pantallaCategoria;
     private PreguntaControlador PreguntaControlador;
     private JugadorServicio jugadorServicio;
-    private InicioControlador inicioControlador;
-
     private Jugador jugador;
     private final String[] CATEGORIAS = {"Cultura", "Monumentos", "Historia"};
 
@@ -29,20 +27,6 @@ public class CategoriaControlador implements ActionListener, WindowListener {
      * CONTRUCTOR
      * @param jugador
      */
-    public CategoriaControlador(InicioControlador inicioControlador,JugadorServicio jugadorServicio,Jugador jugador){
-        this.jugadorServicio = jugadorServicio;
-        this.inicioControlador = inicioControlador;
-        this.jugador = jugador;
-        this.pantallaCategoria = new PantallaCategoria();
-        this.pantallaCategoria.getLblTitulo().setText("¡Descubre Sevilla!");
-        this.pantallaCategoria.setTitle("Bienvenido Explorador | " + this.jugador.getNombre());
-        //activar los listeners
-        addListenesPantallaCategoria();
-        //incluir las opciones al comboBox
-        this.pantallaCategoria.getComboBox().setModel(new DefaultComboBoxModel(Arrays.stream(CATEGORIAS).toArray()));
-        this.pantallaCategoria.setVisible(true);
-
-    }
     public CategoriaControlador(JugadorServicio jugadorServicio,Jugador jugador){
         this.jugadorServicio = jugadorServicio;
         this.jugador = jugador;
@@ -106,7 +90,7 @@ public class CategoriaControlador implements ActionListener, WindowListener {
      */
     public void onClose(){
         this.pantallaCategoria.dispose();
-        this.inicioControlador.runMusic();
+
 
     }
 

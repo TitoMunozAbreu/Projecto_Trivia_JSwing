@@ -30,7 +30,9 @@ public class PantallaInicio extends JFrame{
     public PantallaInicio(){
         setContentPane(contentPane);
         setTitle("Sevilla Trivia");
-        setSize(550,500);
+        ImageIcon imageIcon = new ImageIcon("src/com/recursos/images/azulejos.png");
+        setIconImage(imageIcon.getImage());
+        setSize(570,610);
         setLocationRelativeTo(null);
     }
 

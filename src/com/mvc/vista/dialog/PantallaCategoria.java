@@ -19,6 +19,9 @@ public class PantallaCategoria extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         setSize(350,350);
+        ImageIcon imageIcon = new ImageIcon("src/com/recursos/images/azulejos.png");
+        setIconImage(imageIcon.getImage());
+        setTitle("Seleccionar categoria");
         setLocationRelativeTo(null);
         //getRootPane().setDefaultButton(buttonOK);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

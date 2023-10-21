@@ -31,6 +31,9 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
     private int preguntaActualIndex;
     private Pregunta pregunta;
     private static Timer timer;
+    private UIManager uiManager;
+    private SonidoControlador sonidoControlador;
+    private CategoriaControlador categoriaControlador;
 
     /**
      * CONSTRUCTOR
@@ -38,6 +41,8 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      * @param jugador
      */
     public PreguntaControlador(JugadorServicio jugadorServicio, String categoria, Jugador jugador) {
+        //play musica
+        runMusic();
         //Instanciar variables
         this.preguntaServicio = new PreguntaServicio();
         this.jugadorServicio = jugadorServicio;
@@ -46,6 +51,12 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         this.preguntas = this.preguntaServicio.listarPreguntasSegunCategoria(this.categoria);
         this.preguntaActualIndex = 0;
 
+        //configurar colores de JOptionPane
+        this.uiManager = new UIManager();
+        UIManager.put("OptionPane.background",new Color(255,249,196));
+        UIManager.put("Panel.background",new Color(255,249,196));
+        UIManager.put("OptionPane.messageForeground",new Color(183,28,28));
+
         //inicializar la pantalla pregunta
         this.pantallaPregunta = new PantallaPregunta();
         this.pantallaPregunta.setTitle("Preguntas de categoria: " + categoria);
@@ -53,13 +64,24 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         addListenesPantallaPregunta();
         //cargar preguntas
         cargarPregunta();
-        //configuracion del temporizador
-        configurarTemporizador();
+
         //configurar puntuacion segun jugador
         this.pantallaPregunta.getMoneda().setText(String.valueOf(jugador.getPuntos()));
         this.pantallaPregunta.setVisible(true);
 
     }
+
+    private void runMusic(){
+        this.sonidoControlador = new SonidoControlador();
+        Thread thread = new Thread(this.sonidoControlador);
+        thread.start();
+
+    }
+
+    private void stopMusic(){
+        this.sonidoControlador.stopMusic();
+    }
+
 
     /**
      * Metodo para establecer un temporizador
@@ -91,7 +113,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                 }
             }
         });
-        this.timer.start();
     }
 
     /**
@@ -102,7 +123,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         this.pantallaPregunta.getMoneda().setText(String.valueOf(puntosJugador));
         this.preguntaActualIndex++;
         cargarPregunta();
-        configurarTemporizador();
 
     }
 
@@ -123,6 +143,9 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
             pantallaPregunta.getOpcion2().setText(pregunta.getOpciones2());
             pantallaPregunta.getOpcion3().setText(pregunta.getOpciones3());
             pantallaPregunta.getOpcion4().setText(pregunta.getOpciones4());
+            //configuracion del temporizador
+            configurarTemporizador();
+            this.timer.start();
         }else {
             //TODO implementar clase sonido, de completada la ronda de preguntas
             //detener temporizador
@@ -133,12 +156,14 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                     "¡Explorador! has finalizo las preguntas de la categoria: " + this.categoria,
                     "Preguntas finalizada",
                     JOptionPane.INFORMATION_MESSAGE);
+            //detener repoducccion de la musica
+            stopMusic();
             //cerrar pantalla pregunta
             this.pantallaPregunta.dispose();
             //mostrar pantalla de podium
             this.podioControlador = new PodioControlador(this.jugadorServicio, this.jugador);
-
         }
+
     }
 
 
@@ -148,6 +173,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      */
     private void addListenesPantallaPregunta() {
         this.pantallaPregunta.getBtnValidar().addActionListener(this);
+        this.pantallaPregunta.getBtnVolver().addActionListener(this);
         this.pantallaPregunta.getOpcion1().addActionListener(this);
         this.pantallaPregunta.getOpcion2().addActionListener(this);
         this.pantallaPregunta.getOpcion3().addActionListener(this);
@@ -167,6 +193,9 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         switch (command){
             case "validar":
                 validarRespuesta(opcionSeleccionada);
+                break;
+            case "volver":
+                onClose();
                 break;
         }
 
@@ -230,8 +259,11 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
     public void onClose(){
         //cancelar temporizador
         //cerrar pantalla pregunta
+        stopMusic();
         this.timer.stop();
         this.pantallaPregunta.dispose();
+        //mostrar pantalla categoria
+        this.categoriaControlador = new CategoriaControlador(this.jugadorServicio, this.jugador);
     }
 
     @Override

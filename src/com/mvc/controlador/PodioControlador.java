@@ -29,7 +29,7 @@ public class PodioControlador implements ActionListener, WindowListener {
      */
     public PodioControlador(JugadorServicio jugadorServicio, Jugador jugador){
         //instanciar variables
-        this.jugadorServicio = new JugadorServicio();
+        this.jugadorServicio = jugadorServicio;
         this.jugador = this.jugadorServicio.mostrarJugadorPorEmail(jugador.getEmail());
 
         this.pantallaPodio = new PantallaPodio();
@@ -64,7 +64,6 @@ public class PodioControlador implements ActionListener, WindowListener {
      * Metodo para cerrar la pantalla
      */
     public void onClose(){
-
         //cerrar la pantalla podio
         this.pantallaPodio.dispose();
     }

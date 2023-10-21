@@ -27,7 +27,10 @@ public class PantallaRegistro extends JDialog {
         //definir las especificaciones de la pantalla
         setContentPane(contentPane);
         setModal(true);
-        setSize(500,450);
+        ImageIcon imageIcon = new ImageIcon("src/com/recursos/images/azulejos.png");
+        setIconImage(imageIcon.getImage());
+        setTitle("Registrar | nuevo explorador");
+        setSize(480,510);
         setLocationRelativeTo(null);
         getRootPane().setDefaultButton(btnCrear);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

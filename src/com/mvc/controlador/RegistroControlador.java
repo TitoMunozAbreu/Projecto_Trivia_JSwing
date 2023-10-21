@@ -22,6 +22,7 @@ import java.util.Locale;
  * Gestiona la capa de los componentes de la pantalla del registro
  */
 public class RegistroControlador extends Component implements ActionListener, ChangeListener, WindowListener {
+    private UIManager uiManager;
     private PantallaRegistro pantallaRegistro;
     private JugadorServicio jugadorServicio;
     private CategoriaControlador categoriaControlador;
@@ -38,6 +39,11 @@ public class RegistroControlador extends Component implements ActionListener, Ch
         addListenersPantallaRegistro();
         //activar la validacion de dato
         addValidation();
+        //configurar colores de JOptionPane
+        this.uiManager = new UIManager();
+        UIManager.put("OptionPane.background",new Color(255,249,196));
+        UIManager.put("Panel.background",new Color(255,249,196));
+        UIManager.put("OptionPane.messageForeground",new Color(183,28,28));
         this.pantallaRegistro.setVisible(true);
     }
 

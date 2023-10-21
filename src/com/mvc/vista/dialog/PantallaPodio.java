@@ -24,6 +24,9 @@ public class PantallaPodio extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(btnSalir);
         setSize(450,350);
+        ImageIcon imageIcon = new ImageIcon("src/com/recursos/images/azulejos.png");
+        setIconImage(imageIcon.getImage());
+        setTitle("Resultados del juego");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 

@@ -10,7 +10,9 @@ import java.io.FileNotFoundException;
 public class SonidoControlador implements Runnable{
     private Player player;
     private Clip clip;
-    private String introPath = "src/com/recursos/sonidos/Intro.mp3";
+    //bandera para controlar la reproduccion del sonido
+    private boolean isPlaying;
+    private String introPath = "src/com/recursos/sonidos/juego.mp3";
     public void runMusic(String path){
         try {
             FileInputStream audioSource = new FileInputStream(path);
@@ -26,11 +28,15 @@ public class SonidoControlador implements Runnable{
     }
 
     public void stopMusic(){
+        this.isPlaying = false;
         this.player.close();
     }
 
     @Override
     public void run() {
         runMusic(introPath);
+        while (isPlaying){
+
+        }
     }
 }

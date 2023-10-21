@@ -25,7 +25,7 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
     private CategoriaControlador categoriaControlador;
     private RegistroControlador registroControlador;
     private AdminControlador adminControlador;
-    private SonidoControlador sonidoControlador;
+
 
     /**
      * CONTRUCTOR
@@ -35,25 +35,12 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         this.jugadorServicio = new JugadorServicio();
         //instanciar la pantalla de inicio
         this.pantallaInicio = new PantallaInicio();
-        //play sonido intro
-        runMusic();
         //activar validacion de datos
         addValidation();
         //activar los listeners
         addListenersPantallaIncio();
         this.pantallaInicio.setVisible(true);
     }
-
-    public void runMusic() {
-        this.sonidoControlador = new SonidoControlador();
-        Thread thread = new Thread(this.sonidoControlador);
-        thread.start();
-    }
-
-    private void stopMusic(){
-        this.sonidoControlador.stopMusic();
-    }
-
 
     /**
      * Metodo para definir la validación
@@ -133,10 +120,8 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         //mostrar mensaje
         if(estaAutenticado){
             Jugador jugador = this.jugadorServicio.mostrarJugadorPorEmail(this.pantallaInicio.getEmail().getText());
-            //detener sonido intro
-            stopMusic();
             //iniciar la pantalla categoria
-            categoriaControlador = new CategoriaControlador(InicioControlador.this,this.jugadorServicio, jugador);
+            categoriaControlador = new CategoriaControlador(this.jugadorServicio, jugador);
         }else {
             JOptionPane.showMessageDialog(
                     this,
