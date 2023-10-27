@@ -1,42 +1,64 @@
 package com.mvc.controlador;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+import com.mvc.controlador.sonidos.SonidoJuego;
+import com.mvc.controlador.sonidos.SonidoRC;
+import com.mvc.controlador.sonidos.SonidoRM;
+import com.mvc.controlador.sonidos.SonidoRR;
 
-import javax.sound.sampled.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+public class SonidoControlador {
+    private SonidoJuego sonidoJuego;
+    private SonidoRC sonidoRC;
+    private SonidoRM sonidoRM;
+    private SonidoRR sonidoRR;
 
-public class SonidoControlador implements Runnable{
-    private Player player;
-    private Clip clip;
-    //bandera para controlar la reproduccion del sonido
-    private boolean isPlaying;
-    private String introPath = "src/com/recursos/sonidos/juego.mp3";
-    public void runMusic(String path){
-        try {
-            FileInputStream audioSource = new FileInputStream(path);
-            this.player = new Player(audioSource);
-            this.player.play();
+    public SonidoControlador() {
+        this.sonidoJuego = new SonidoJuego();
+        this.sonidoRC = new SonidoRC();
+        this.sonidoRM = new SonidoRM();
+        this.sonidoRR = new SonidoRR();
+    }
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (JavaLayerException e) {
-            e.printStackTrace();
-        }
+
+    public void runMusicJuego(){
+        Thread thread = new Thread(this.sonidoJuego);
+        thread.start();
 
     }
 
-    public void stopMusic(){
-        this.isPlaying = false;
-        this.player.close();
+    public void stopMusicJuego(){
+        this.sonidoJuego.stopMusic();
     }
 
-    @Override
-    public void run() {
-        runMusic(introPath);
-        while (isPlaying){
 
-        }
+    public void runMusicRC(){
+        Thread thread = new Thread(this.sonidoRC);
+        thread.start();
+
+    }
+
+    public void stopMusicRC(){
+        this.sonidoRC.stopMusic();
+    }
+
+
+    public void runMusicRR(){
+        Thread thread = new Thread(this.sonidoRR);
+        thread.start();
+
+    }
+
+    public void stopMusicRR(){
+        this.sonidoRR.stopMusic();
+    }
+
+
+    public void runMusicRM(){
+        Thread thread = new Thread(this.sonidoRM);
+        thread.start();
+
+    }
+
+    public void stopMusicRM(){
+        this.sonidoRM.stopMusic();
     }
 }

@@ -9,6 +9,7 @@ import org.netbeans.validation.api.ui.ValidationGroup;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.MessageFormat;
@@ -20,6 +21,7 @@ import java.util.ResourceBundle;
  * Gestiona la capa de los componentes de la pantalla inicio
  */
 public class InicioControlador extends JFrame implements ActionListener, ChangeListener {
+    private UIManager uiManager;
     private PantallaInicio pantallaInicio;
     private JugadorServicio jugadorServicio;
     private CategoriaControlador categoriaControlador;
@@ -39,6 +41,11 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         addValidation();
         //activar los listeners
         addListenersPantallaIncio();
+        //configurar colores de JOptionPane
+        this.uiManager = new UIManager();
+        UIManager.put("OptionPane.background",new Color(255,249,196));
+        UIManager.put("Panel.background",new Color(255,249,196));
+        UIManager.put("OptionPane.messageForeground",new Color(183,28,28));
         this.pantallaInicio.setVisible(true);
     }
 

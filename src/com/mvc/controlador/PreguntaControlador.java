@@ -42,7 +42,8 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
      */
     public PreguntaControlador(JugadorServicio jugadorServicio, String categoria, Jugador jugador) {
         //play musica
-        runMusic();
+        this.sonidoControlador = new SonidoControlador();
+        this.sonidoControlador.runMusicJuego();
         //Instanciar variables
         this.preguntaServicio = new PreguntaServicio();
         this.jugadorServicio = jugadorServicio;
@@ -69,17 +70,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         this.pantallaPregunta.getMoneda().setText(String.valueOf(jugador.getPuntos()));
         this.pantallaPregunta.setVisible(true);
 
-    }
-
-    private void runMusic(){
-        this.sonidoControlador = new SonidoControlador();
-        Thread thread = new Thread(this.sonidoControlador);
-        thread.start();
-
-    }
-
-    private void stopMusic(){
-        this.sonidoControlador.stopMusic();
     }
 
 
@@ -157,7 +147,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                     "Preguntas finalizada",
                     JOptionPane.INFORMATION_MESSAGE);
             //detener repoducccion de la musica
-            stopMusic();
+            this.sonidoControlador.stopMusicJuego();
             //cerrar pantalla pregunta
             this.pantallaPregunta.dispose();
             //mostrar pantalla de podium
@@ -211,6 +201,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         //comprobar respuesta correcta
         if(this.pregunta.getRespuestaCorrecta() == opcionSeleccionada){
             this.timer.stop();
+            this.sonidoControlador.runMusicRC();
             //sumar puntos
             int puntos = sumarPuntosPorTiempoRespuesta();
             //mostar mensaje al jugador
@@ -259,7 +250,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
     public void onClose(){
         //cancelar temporizador
         //cerrar pantalla pregunta
-        stopMusic();
+        this.sonidoControlador.stopMusicJuego();
         this.timer.stop();
         this.pantallaPregunta.dispose();
         //mostrar pantalla categoria
