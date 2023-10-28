@@ -5,6 +5,10 @@ import com.mvc.repositorio.PreguntaRepositorio;
 
 import java.util.List;
 
+/**
+ * CLASE SERVICIO
+ * contiene la logica de las preguntas del juego
+ */
 public class PreguntaServicio {
     private PreguntaRepositorio pr;
 

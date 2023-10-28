@@ -5,12 +5,18 @@ import com.mvc.controlador.sonidos.SonidoRC;
 import com.mvc.controlador.sonidos.SonidoRM;
 import com.mvc.controlador.sonidos.SonidoRR;
 
+/**
+ * Clase controlador Sonido
+ */
 public class SonidoControlador {
     private SonidoJuego sonidoJuego;
     private SonidoRC sonidoRC;
     private SonidoRM sonidoRM;
     private SonidoRR sonidoRR;
 
+    /**
+     * CONSTRUCTOR
+     */
     public SonidoControlador() {
         this.sonidoJuego = new SonidoJuego();
         this.sonidoRC = new SonidoRC();
@@ -18,13 +24,20 @@ public class SonidoControlador {
         this.sonidoRR = new SonidoRR();
     }
 
-
+    /**
+     * Metodo que reproduce la musica, atraves
+     * de la instancia de un hilo
+     */
     public void runMusicJuego(){
         Thread thread = new Thread(this.sonidoJuego);
         thread.start();
 
     }
 
+    /**
+     * Metodo que detiene la musica y la ejecución
+     * de un hilo
+     */
     public void stopMusicJuego(){
         this.sonidoJuego.stopMusic();
     }

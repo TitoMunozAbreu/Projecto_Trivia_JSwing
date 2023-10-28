@@ -7,12 +7,21 @@ import javax.sound.sampled.Clip;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+/**
+ * Clase sonido Respuesta Correcta
+ */
 public class SonidoRC implements Runnable{
     private Player player;
     private Clip clip;
+    private String SONIDO_PATH = "src/com/recursos/sonidos/respuestaCorrecta.mp3";
+
     //bandera para controlar la reproduccion del sonido
     private boolean isPlaying;
-    private String sonidoPath = "src/com/recursos/sonidos/respuestaCorrecta.mp3";
+
+    /**
+     * Metodo para reproducir la musica
+     * @param path
+     */
     public void runMusic(String path){
         try {
             FileInputStream audioSource = new FileInputStream(path);
@@ -27,14 +36,21 @@ public class SonidoRC implements Runnable{
 
     }
 
+    /**
+     * Metodo que detiene la reproducción de la musica
+     */
     public void stopMusic(){
         this.isPlaying = false;
         this.player.close();
     }
 
+    /***
+     * Metodo que sobre escribre la clase Thread
+     * para la creacion de un hilo
+     */
     @Override
     public void run() {
-        runMusic(sonidoPath);
+        runMusic(SONIDO_PATH);
         while (isPlaying){
 
         }

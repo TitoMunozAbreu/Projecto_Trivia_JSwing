@@ -113,7 +113,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         this.pantallaPregunta.getMoneda().setText(String.valueOf(puntosJugador));
         this.preguntaActualIndex++;
         cargarPregunta();
-
     }
 
     /**
@@ -153,7 +152,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
             //mostrar pantalla de podium
             this.podioControlador = new PodioControlador(this.jugadorServicio, this.jugador);
         }
-
     }
 
 
@@ -169,7 +167,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         this.pantallaPregunta.getOpcion3().addActionListener(this);
         this.pantallaPregunta.getOpcion4().addActionListener(this);
         this.pantallaPregunta.addWindowListener(this);
-
     }
 
     @Override
@@ -188,8 +185,6 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                 onClose();
                 break;
         }
-
-
     }
 
     /**
@@ -201,7 +196,7 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
         //comprobar respuesta correcta
         if(this.pregunta.getRespuestaCorrecta() == opcionSeleccionada){
             this.timer.stop();
-            this.sonidoControlador.runMusicRC();
+
             //sumar puntos
             int puntos = sumarPuntosPorTiempoRespuesta();
             //mostar mensaje al jugador
@@ -209,14 +204,14 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
                     PreguntaControlador.this,
                     "¡OLE! sigue así explorador has ganado: " + puntos + " monedas!",
                     "Respuesta Correcta",JOptionPane.INFORMATION_MESSAGE);
-            cargarSiguientePregunta();
         }else {
+            this.sonidoControlador.runMusicRM();
             JOptionPane.showMessageDialog(
                     this,
                     "¡NO has acertado, animo explorador!",
                     "Respuesta Incorrecta",JOptionPane.ERROR_MESSAGE);
-            cargarSiguientePregunta();
         }
+        cargarSiguientePregunta();
     }
 
     private int sumarPuntosPorTiempoRespuesta() {
@@ -226,9 +221,11 @@ public class PreguntaControlador extends Component implements ActionListener, Wi
             //sumar puntos por rapidez de respuesta al jugador
             this.jugadorServicio.sumarPuntosPorRespuestaRapida(this.jugador);
             puntos = 15;
+            this.sonidoControlador.runMusicRR();
         }else if(this.tiempoRestante > 1 || this.tiempoRestante < 11){
             this.jugadorServicio.sumarPuntosPorRespuestaCorrecta(this.jugador);
             puntos = 10;
+            this.sonidoControlador.runMusicRC();
         }
         return puntos;
     }

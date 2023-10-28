@@ -52,6 +52,10 @@ public class PodioControlador implements ActionListener, WindowListener {
         this.pantallaPodio.addWindowListener(this);
     }
 
+    /***
+     * Metodo que carga los datos de la tabla
+     * del podio
+     */
     private void cargarDatosTablaPodio() {
         //instanciar la clase que extiende de table model
         this.podioTableModel = new PodioTableModel(this.jugadorServicio);
@@ -68,6 +72,11 @@ public class PodioControlador implements ActionListener, WindowListener {
         this.pantallaPodio.dispose();
     }
 
+    /***
+     * Metodo que escucha los eventos
+     * que se realizan en la pantalla
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         //almacenar la boton seleccionado
@@ -81,6 +90,10 @@ public class PodioControlador implements ActionListener, WindowListener {
         }
     }
 
+    /**
+     * Metodo  para volver a la pantalla de las
+     * preguntas
+     */
     private void volverPantallaPregunta() {
         //cerrar pantalla podio
         onClose();
