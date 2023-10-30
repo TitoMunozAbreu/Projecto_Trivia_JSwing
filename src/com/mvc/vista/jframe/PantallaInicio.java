@@ -25,6 +25,7 @@ public class PantallaInicio extends JFrame{
     private JPanel usuarioPane;
     private JPanel btnPane;
     private ValidationPanel validacionPanel;
+    private JLabel lblRecuperar;
 
 
     public PantallaInicio(){
@@ -60,4 +61,7 @@ public class PantallaInicio extends JFrame{
         return validacionPanel;
     }
 
+    public JLabel getLblRecuperar() {
+        return lblRecuperar;
+    }
 }

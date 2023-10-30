@@ -12,6 +12,8 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -20,7 +22,7 @@ import java.util.ResourceBundle;
  * CLASE INICIO CONTROLADOR
  * Gestiona la capa de los componentes de la pantalla inicio
  */
-public class InicioControlador extends JFrame implements ActionListener, ChangeListener {
+public class InicioControlador extends JFrame implements ActionListener, ChangeListener, MouseListener {
     private UIManager uiManager;
     private PantallaInicio pantallaInicio;
     private JugadorServicio jugadorServicio;
@@ -48,6 +50,8 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         UIManager.put("OptionPane.messageForeground",new Color(183,28,28));
         this.pantallaInicio.setVisible(true);
     }
+
+
 
     /**
      * Metodo para definir la validación
@@ -88,6 +92,7 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         this.pantallaInicio.getBtnRegistrar().addActionListener(this);
         this.pantallaInicio.getBtnAdmin().addActionListener(this);
         this.pantallaInicio.getValidacionPanel().addChangeListener(this);
+        this.pantallaInicio.getLblRecuperar().addMouseListener(this);
     }
 
 
@@ -147,5 +152,36 @@ public class InicioControlador extends JFrame implements ActionListener, ChangeL
         }else {
             this.pantallaInicio.getBtnIniciar().setEnabled(false);
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+       //recuperar contraseña
+        if(e.getClickCount() >= 1) {
+            String contraseña = JOptionPane.showInputDialog(this, "¿Desea recuperar la contraseña? Ingresa un email", "Recuperar Contraseña", JOptionPane.QUESTION_MESSAGE);
+            if(contraseña != null && contraseña.equals("")){
+                JOptionPane.showMessageDialog(this,"Se ha enviado  a su correo las instrucciones para recuperar la contraseña", "Recuperar contraseña",JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
